@@ -14,6 +14,15 @@
                         <time class="text-center">data: {{$article->created_at->format('d/m/Y')}}</time>
                     </header>
                     <p class="my-3">{{$article->body}}</p>
+                    <div class="d-flex justify-content-center my-3">
+                        <a href="{{route('article.index')}}" class="btn btn-outline-warning">Torna indietro</a>
+                    </div>
+                    @if (Auth::user() && Auth::user()->is_revisor)
+                    <div class="d-flex justify-content-center my-3">
+                        <a href="{{route('revisor.acceptArticle', compact('article'))}}" class=" mx-3 btn btn-outline-success">Accetta Articolo</a>
+                        <a href="{{route('revisor.rejectArticle', compact('article'))}}" class=" mx-3 btn btn-outline-danger">Rifiuta Articolo</a>                    
+                    </div>
+                    @endif
                 </article>
             </div>
         </div>

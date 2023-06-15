@@ -12,15 +12,15 @@ use App\Http\Requests\ArticleRequest;
 class ArticleController extends Controller
 {
 
-    public function __construct(){
-        return $this->middleware('auth')->except('index','show','byCategory','byEditor','indexByOldestArticles','indexByNewestArticles');
-    }
+    // public function __construct(){
+    //     return $this->middleware('auth')->except('index','show','byCategory','byEditor','indexByOldestArticles','indexByNewestArticles');
+    // }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $articles = Article::orderBy('created_at','desc')->get();
+        $articles = Article::where('is_accepted',true)->orderBy('created_at','desc')->get();
         return view('article.index', compact('articles'));
     }
 
@@ -82,42 +82,54 @@ class ArticleController extends Controller
     }
 
     public function byCategory (Category $category){
-        $articles = $category->articles->sortByDesc('created_at');
+        $articles = $category->articles->sortByDesc('created_at')->filter(function($article){
+            return $article->is_accepted == true;
+        });
         return view('article.by-category', compact('articles', 'category'));
     }
 
     public function byEditor (User $user){
-        $articles = $user->articles->sortByDesc('created_at');
+        $articles = $user->articles->sortByDesc('created_at')->filter(function($article){
+            return $article->is_accepted == true;
+        });
         return view('article.by-editor', compact('articles', 'user'));
     }
 
     public function indexByOldestArticles(){
-        $articles = Article::orderBy('created_at','asc')->get();
+        $articles = Article::where('is_accepted',true)->orderBy('created_at','asc')->get();
         return view('article.index', compact('articles'));
     }
 
     public function indexByNewestArticles(){
-        $articles = Article::orderBy('created_at','desc')->get();
+        $articles = Article::where('is_accepted',true)->orderBy('created_at','desc')->get();
         return view('article.index', compact('articles'));
     }
 
     public function byCatOldestArticles (Category $category){
-        $articles = $category->articles->sortBy('created_at');
+        $articles = $category->articles->sortBy('created_at')->filter(function($article){
+            return $article->is_accepted == true;
+        });
         return view('article.by-category', compact('articles', 'category'));
     }
 
     public function byCatNewestArticles (Category $category){
-        $articles = $category->articles->sortByDesc('created_at');
+        $articles = $category->articles->sortByDesc('created_at')->filter(function($article){
+            return $article->is_accepted == true;
+        });
         return view('article.by-category', compact('articles', 'category'));
     }
 
     public function byEditorOldestArticles (User $user){
-        $articles = $user->articles->sortBy('created_at');
+        $articles = $user->articles->sortBy('created_at')->filter(function($article){
+            return $article->is_accepted == true;
+        });
         return view('article.by-editor', compact('articles', 'user'));
     }
 
     public function byEditorNewestArticles (User $user){
-        $articles = $user->articles->sortByDesc('created_at');
+        $articles = $user->articles->sortByDesc('created_at')->filter(function($article){
+            return $article->is_accepted == true;
+        });
         return view('article.by-editor', compact('articles', 'user'));
     }
 

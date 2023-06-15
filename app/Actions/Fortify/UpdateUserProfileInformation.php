@@ -19,8 +19,13 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     {
 
         $messages = [
-            'email.required' => 'La email è richiesta.',           
+            'email.required' => 'La email è richiesta.',
+            'email.string' => 'Il formato della email non è valido.',           
+            'email.email' => 'Il formato della email non è valido.',           
+            'email.max' => 'Il formato della email non è valido.',           
             'name.required' => 'Il nome utente è richiesto.',
+            'name.string' => 'Il formato del nome utente non è valido.',           
+            'name.max' => 'Il formato del nome utente non è valido.',    
             'name.unique' => 'Il nome utente è già stato preso.',
             'realname.required' => 'Il nome è richiesto.',
             'realname.alpha' => 'Il formato del nome non è valido',

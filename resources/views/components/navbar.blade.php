@@ -31,8 +31,23 @@
             <li>
               <a href="{{route('myProfile')}}" class="dropdown-item list-cst">Il mio profilo</a>
             </li>
+            @if (Auth::user()->is_admin)
+            <li>
+              <a href="{{route('admin.dashboard')}}" class="dropdown-item list-cst">Dashboard Admin</a>
+            </li>           
+            @endif
+            @if (Auth::user()->is_revisor)
+            <li>
+              <a href="{{route('revisor.dashboard')}}" class="dropdown-item list-cst">Dashboard Revisor</a>
+            </li>           
+            @endif
+            @if (Auth::user()->is_writer)
             <li>
               <a href="{{route('article.create')}}" class="dropdown-item list-cst">Inserisci Articolo</a>
+            </li>         
+            @endif
+            <li>
+              <a href="{{route('careers')}}" class="dropdown-item list-cst">Lavora con noi</a>
             </li>
             <li><a class="dropdown-item list-cst" href="{{route('logout')}}" onclick="event.preventDefault(); getElementById('form-logout').submit();">Logout</a>
               <form id="form-logout" action="{{route('logout')}}" method="POST" class="d-none">
