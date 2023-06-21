@@ -1,5 +1,5 @@
 <x-layout title="Inserisci Articolo">
-    <div class="formContainer">
+    <div class="formContainer my-5">
         <div class="formWrapper-article">
             <form action="{{route('article.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -43,6 +43,13 @@
                 @error('body')
                 <div class="text-danger mb-2">{{$message}}</div>
                 @enderror
+
+                <div class="mb-3">
+                    <label for="tags" class="form-label">Tags:</label>
+                    <input type="text" name="tags" class="form-control" id="tags" value="{{old('tags')}}">
+                    <span class="small fst-italic">Inserisci i tags separati da una virgola</span>
+                </div>
+
                 <div class="mb-3">
                     <label for="insertImage" class="form-label">Inserisci Immagine</label>
                     <input type="file" name="image" class="form-control w-25 @error('image') is-invalid @enderror" id="insertImage">

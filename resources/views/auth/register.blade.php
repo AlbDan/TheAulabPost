@@ -1,5 +1,5 @@
 <x-layout title="Register">
-    <div class="formContainer">
+    <div class="formContainer my-5">
         <div class="formWrapper">
             <form action="{{route('register')}}" method="POST">
                 @csrf

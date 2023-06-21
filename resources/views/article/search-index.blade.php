@@ -1,23 +1,8 @@
-<x-layout title="Articoli per categoria">
+<x-layout title="Articoli cercati">
     <div class="container my-5">
         <div class="row">
             <div class="col-12">
-                <h2 class="text-center display-5">Categoria: {{$category->name}}</h2>
-            </div>
-            <div class="col-12 mb-3">
-                <div class="filter-container">
-                    <div class="filter-selected">
-                        <p class="my-2 filt-sel-cst">Articoli più recenti</p>
-                    </div>
-                    <div class="container-list-cst">
-                        <div class="cont-inner-cst">
-                            <ul class="list-cst">
-                                <li><a href="{{route('article.byCatNewest', $category)}}" id="ArtByNewest" class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Articoli più recenti</a></li>
-                                <li><a href="{{route('article.byCatOldest', $category)}}" id="ArtByOldest" class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Articoli più vecchi</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <h2 class="text-center display-5">Risultati per la ricerca: {{$query}}</h2>
             </div>
             @foreach ($articles as $article)
             <div class="col-12 my-3">

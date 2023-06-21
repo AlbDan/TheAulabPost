@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\User;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ArticleRequest;
 
 class ArticleController extends Controller
 {
 
-    // public function __construct(){
-    //     return $this->middleware('auth')->except('index','show','byCategory','byEditor','indexByOldestArticles','indexByNewestArticles');
-    // }
     /**
      * Display a listing of the resource.
      */
@@ -37,7 +36,7 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        Article::create([
+        $article = Article::create([
             'title' => $request->title,
             'subtitle' => $request->subtitle,
             'category_id' => $request->id,
@@ -45,6 +44,15 @@ class ArticleController extends Controller
             'image' => $request->file('image')->store('public/imgs'),
             'user_id' => Auth::id(),
         ]);
+
+        $tags = explode(',', $request->tags);
+
+        foreach ($tags as $tag) {
+            $newTag = Tag::updateOrCreate([
+                'name' => $tag
+            ]);
+            $article->tags()->attach($newTag);
+        }
 
         return redirect(route('article.create'))->with('status','Articolo inserito correttamente!');
     }
@@ -133,4 +141,26 @@ class ArticleController extends Controller
         return view('article.by-editor', compact('articles', 'user'));
     }
 
+    public function articleSearch(Request $request){
+        $query = $request->input('query');
+
+        $articles_t = Article::all();
+        $articles_w_tags = new Collection([]);
+        
+        foreach ($articles_t as $article_t) {
+            if (count($article_t->tags)!=0) {
+                foreach ($article_t->tags as $article_tt) {
+                    if ($article_tt->name == strtolower($query)) {
+                        $articles_w_tags =  $articles_w_tags->merge($article_tt->articles);
+                    }
+                }
+            }
+        }
+
+        $articles_s = Article::search($query)->where('is_accepted',true)->orderBy('created_at','desc')->get();
+
+        $articles = $articles_w_tags->merge($articles_s);
+
+        return view('article.search-index', compact('articles','query'));
+    }
 }
