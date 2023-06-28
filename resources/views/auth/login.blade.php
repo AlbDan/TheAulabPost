@@ -22,7 +22,10 @@
                 <div class="mb-3 form-check">
                     <input type="checkbox" name="remember" class="form-check-input" id="rememberMe">
                     <label class="form-check-label" for="rememberMe">Ricordati di me</label>
-                </div> 
+                </div>
+                <div class="mb-3">
+                    <a href="{{url('auth/google')}}" class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Login con Google</a>
+                </div>    
                 <div class="mb-3">
                     <a href="{{route('password.request')}}" class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Password dimenticata?</a>
                 </div>               
