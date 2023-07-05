@@ -1,6 +1,6 @@
 <x-layout title="Register">
     <div class="formContainer my-5">
-        <div class="formWrapper">
+        <div class="formWrapper form-loading">
             <form action="{{route('register')}}" method="POST">
                 @csrf
                 <h2 class="text-center text-warning fs-1">The Aulab Post</h2>

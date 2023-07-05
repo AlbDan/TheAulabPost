@@ -1,6 +1,6 @@
 <x-layout title="Forgot password">
     <div class="formContainer">
-        <div class="formWrapper">
+        <div class="formWrapper form-loading">
             <form action="{{route('password.request')}}" method="POST">
                 @csrf
                 <h2 class="text-center text-warning fs-1">The Aulab Post</h2>

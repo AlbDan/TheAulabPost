@@ -1,6 +1,6 @@
 <x-layout title="Conferma password">
     <div class="formContainer">
-        <div class="formWrapper">
+        <div class="formWrapper form-loading">
             <form action="{{url('user/confirm-password')}}" method="POST">
                 @csrf
                 <h2 class="text-center text-warning fs-1">The Aulab Post</h2>

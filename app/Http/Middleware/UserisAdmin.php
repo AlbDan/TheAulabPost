@@ -17,7 +17,7 @@ class UserisAdmin
     public function handle(Request $request, Closure $next): Response
     {
 
-        if (Auth::user() && Auth::user()->is_admin) { // in questo si evita di chiamare due middleware nelle rotte
+        if (Auth::user() && Auth::user()->is_admin) {
             return $next($request);
         }
         else {

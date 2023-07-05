@@ -29,7 +29,7 @@ class TagRequest extends FormRequest
     public function messages(){
         return [
             'name.required' => "Il nome del tag è richiesto",
-            'name.unique' => "Il tag è già presente nel database",
+            'name.unique' => "Questo tag è già presente nel database",
         ];
     }
 

@@ -29,6 +29,7 @@ class ArticleRequest extends FormRequest
             'id' => Rule::exists(Category::class),
             'body' => 'required|min:10',
             'image' => 'required|mimes:jpg,bmp,png',
+            'tags' => 'required'
         ];
     }
 
@@ -43,6 +44,7 @@ class ArticleRequest extends FormRequest
             'body.min' => 'Il body deve contenere almeno 10 caratteri',
             'image.required' => "L'immagine è richiesta",
             'image.mimes' => "Il formato non è valido, (formati validi: jpg, bmp e png)",
+            'tags.required' => "Inserisci almeno un tag",
         ];
     }
 }

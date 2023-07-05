@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\WriterController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\RevisorController;
 use App\Http\Controllers\GoogleLoginController;
@@ -31,13 +32,15 @@ Route::get('/my-profile', [UserController::class, 'myProfile'])->name('myProfile
 Route::get('/my-profile/modify-profile', [UserController::class, 'modMyProfile'])->name('modMyProfile');
 Route::get('/twoFA', [UserController::class, 'twoFA'])->name('twoFA');
 
-
 // Article routes----------------------------------------------------------------------------------------------
 
 // CREATE
 Route::middleware('is_writer')->group(function () {
     Route::get('/article/create', [ArticleController::class, 'create'])->name('article.create');
     Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
+    Route::get('/article/edit/{article}', [ArticleController::class, 'edit'])->name('article.edit');
+    Route::put('/article/update/{article}', [ArticleController::class, 'update'])->name('article.update');
+    Route::delete('/article/delete/{article}', [ArticleController::class, 'destroy'])->name('article.delete');
 });
 
 // READ
@@ -64,6 +67,15 @@ Route::get('/article/editor/by-newest/{user}', [ArticleController::class, 'byEdi
 
 // Article Search
 Route::get('/article/search', [ArticleController::class, 'articleSearch'])->name('article.search');
+Route::get('/article/search-by-oldest/{query}', [ArticleController::class, 'articleSearchByOldest'])->name('article.searchByOldest');
+Route::get('/article/search-by-newest/{query}', [ArticleController::class, 'articleSearchByNewest'])->name('article.searchByNewest');
+
+// Article Filter (Tag)
+Route::get('/article/tag/{tag}', [ArticleController::class, 'byTag'])->name('article.byTag');
+
+// Article Filter (Tag-Date)
+Route::get('/article/tag/by-oldest/{tag}', [ArticleController::class, 'byTagOldestArticles'])->name('article.byTagOldest');
+Route::get('/article/tag/by-newest/{tag}', [ArticleController::class, 'byTagNewestArticles'])->name('article.byTagNewest');
 
 // Admin Routes------------------------------------------------------------------------------------------------
 Route::prefix('admin')->middleware('is_admin')->group(function () {
@@ -87,6 +99,12 @@ Route::middleware('is_revisor')->group(function () {
     Route::get('/revisor/{article}/accept', [RevisorController::class, 'acceptArticle'])->name('revisor.acceptArticle');
     Route::get('/revisor/{article}/reject', [RevisorController::class, 'rejectArticle'])->name('revisor.rejectArticle');
     Route::get('/revisor/{article}/undo', [RevisorController::class, 'undoArticle'])->name('revisor.undoArticle');
+});
+
+// Writer Routes-----------------------------------------------------------------------------------------------
+
+Route::prefix('writer')->middleware('is_writer')->group(function(){
+    Route::get('/dashboard', [WriterController::class, 'dashboard'])->name('writer.dashboard');
 });
 
 // Google Login------------------------------------------------------------------------------------------------

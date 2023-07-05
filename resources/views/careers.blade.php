@@ -1,6 +1,6 @@
 <x-layout title="Careers">
     <div class="formContainer">
-        <div class="formWrapper">
+        <div class="formWrapper form-loading">
             <form action="{{route('careers.submit')}}" method="POST">
                 @csrf
                 <h2 class="text-center text-warning fs-1">The Aulab Post</h2>
@@ -33,7 +33,7 @@
                 <div class="mb-3">
                     <label for="msg" class="form-label">Presentati</label>
                     <div class="form-floating">
-                        <textarea class="form-control @error('msg') is-invalid @enderror" name="msg" maxlength="150" style="height: 100px" required></textarea>
+                        <textarea class="form-control @error('msg') is-invalid @enderror" name="msg" maxlength="150" style="height: 100px" required>{{old('msg')}}</textarea>
                         <label for="floatingTextarea2">Massimo 150 caratteri</label>
                     </div>
                 </div>

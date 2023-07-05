@@ -29,7 +29,7 @@ class CategoryRequest extends FormRequest
     public function messages(){
         return [
             'name.required' => "Il nome della categoria è richiesto",
-            'name.unique' => "La categoria è già presente nel database",
+            'name.unique' => "Questa categoria è già presente nel database",
         ];
     }
 }

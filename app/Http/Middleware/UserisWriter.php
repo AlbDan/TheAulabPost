@@ -16,7 +16,7 @@ class UserisWriter
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user() && Auth::user()->is_writer) { // in questo si evita di chiamare due middleware nelle rotte
+        if (Auth::user() && Auth::user()->is_writer) {
             return $next($request);
         }
         else {

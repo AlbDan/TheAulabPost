@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\Detail;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -19,11 +20,25 @@ return new class extends Migration
         });
 
         //Creaiamo l'account ti amministrazione
-        User::create([
+        // User::create([
+        //     'name' => 'Admin',
+        //     'email' => 'admin@theaulabpost.it',
+        //     'password' => bcrypt('abcd1234'),
+        //     'is_admin' => true,
+        // ]);
+
+        $user = User::create([
             'name' => 'Admin',
             'email' => 'admin@theaulabpost.it',
             'password' => bcrypt('abcd1234'),
             'is_admin' => true,
+        ]);
+
+        Detail::create([
+            'realname' => 'Admin',
+            'surname' => 'Admin',
+            'city' => '',
+            'user_id'=> $user->id
         ]);
     }
 

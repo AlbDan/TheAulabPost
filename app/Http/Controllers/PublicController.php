@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Article;
+//use Illuminate\Support\Str; //Per dare lo slug a tutti gli articoli
 use Illuminate\Http\Request;
 use App\Mail\CareerContactMail;
 use App\Mail\CareerRequestMail;
@@ -16,6 +17,19 @@ class PublicController extends Controller
     
     public function homepage(){
         $articles = Article::where('is_accepted',true)->orderBy('created_at','desc')->take(4)->get();
+
+        //Per dare lo slug a tutti gli articoli
+
+        // $articles_toSlug = Article::all();
+        // for ($i=0; $i < count($articles_toSlug) ; $i++) {
+        //     $articles_toSlug[$i]->update([
+        //         'slug' => Str::slug($articles_toSlug[$i]->title),
+        //     ]);
+        //     dump($articles_toSlug[$i]->slug);
+        // }
+        // dd($articles_toSlug);
+
+
         return view('welcome', compact('articles'));
     }
     

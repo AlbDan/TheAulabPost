@@ -1,8 +1,8 @@
-<x-layout title="Articoli per categoria">
+<x-layout title="Articoli per tag">
     <div class="container my-5 min-vh-100">
         <div class="row">
             <div class="col-12 mt-5">
-                <h2 class="text-center display-5 my-5">Categoria: {{$category->name}}</h2>
+                <h2 class="text-center display-5 my-5">Tag: {{$tag->name}}</h2>
             </div>
         </div>
         <div class="row">
@@ -19,8 +19,8 @@
                             <div class="container-list-cst">
                                 <div class="cont-inner-cst">
                                     <ul class="list-cst">
-                                        <li><a href="{{route('article.byCatNewest', $category)}}" id="ArtByNewest" class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Articoli più recenti</a></li>
-                                        <li><a href="{{route('article.byCatOldest', $category)}}" id="ArtByOldest" class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Articoli più vecchi</a></li>                                    
+                                        <li><a href="{{route('article.byTagNewest', $tag)}}" id="ArtByNewest" class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Articoli più recenti</a></li>
+                                        <li><a href="{{route('article.byTagOldest', $tag)}}" id="ArtByOldest" class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Articoli più vecchi</a></li>                                    
                                     </ul>
                                 </div>
                             </div>

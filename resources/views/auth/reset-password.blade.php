@@ -1,6 +1,6 @@
 <x-layout title="Reset password">
     <div class="formContainer">
-        <div class="formWrapper">
+        <div class="formWrapper form-loading">
             <form action="{{route('password.update')}}" method="POST">
                 @csrf
                 <input type="hidden" name="token" value="{{$request->route('token')}}">

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-dark border-bottom border-1" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg nav-cst fixed-top" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">The Aulab Post</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,12 +12,24 @@
         <li class="nav-item">
           <a class="nav-link" href="{{route('article.index')}}">Leggi gli Articoli</a>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Categorie
+          </a>
+          <ul class="dropdown-menu px-3 nav-cst">
+            @foreach ($categories as $category)
+            @if (count($category->articles)!=0)
+            <li><a class="dropdown-item" href="{{route('article.byCategory', $category)}}">{{$category->name}}</a></li>
+            @endif
+            @endforeach
+          </ul>
+        </li>
         @guest
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Ospite
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu px-3 nav-cst">
             <li><a class="dropdown-item" href="{{route('login')}}">Login</a></li>
             <li><a class="dropdown-item" href="{{route('register')}}">Registrati</a></li>
           </ul>
@@ -27,7 +39,7 @@
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{Auth::user()->name}}
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu px-3 nav-cst">
             <li>
               <a href="{{route('myProfile')}}" class="dropdown-item list-cst">Il mio profilo</a>
             </li>
@@ -42,6 +54,9 @@
             </li>           
             @endif
             @if (Auth::user()->is_writer)
+            <li>
+              <a href="{{route('writer.dashboard')}}" class="dropdown-item list-cst">Dashboard Writer</a>
+            </li>    
             <li>
               <a href="{{route('article.create')}}" class="dropdown-item list-cst">Inserisci Articolo</a>
             </li>         
@@ -60,7 +75,7 @@
       </ul>
       <form method="GET" action="{{route('article.search')}}" class="d-flex" role="search">
         <input class="form-control me-2" type="search" name="query" placeholder="Cosa stai cercando?" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Cerca</button>
+        <button class="btn btn-outline-warning" type="submit">Cerca</button>
       </form>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <x-layout title="Modifica Profilo">
-    <div class="formContainer">
-        <div class="formWrapper my-5">
+    <div class="formContainer mt-5">
+        <div class="formWrapper form-loading my-5">
             <form action="{{route('user-profile-information.update')}}" method="POST">
                 @csrf
                 @method('PUT')
@@ -48,6 +48,9 @@
                 @enderror
                 <div class="d-flex justify-content-center py-3">
                     <button type="submit" class="btn btn-outline-warning px-4 fs-5 text-uppercase">Modifica</button>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a href="{{route('myProfile')}}" class="text-center link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Torna al mio profilo</a>
                 </div>
             </form>
         </div>

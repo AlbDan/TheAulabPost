@@ -1,8 +1,8 @@
 <x-layout title="Conferma password">
     <div class="formContainer">
-        <div class="formWrapper d-flex flex-column">
+        <div class="formWrapper form-loading d-flex flex-column">
             <h2 class="text-center text-warning fs-1">The Aulab Post</h2>
-            <div id="authChWrapper" class="d-block">
+            <div id="authChWrapper" class="d-block visible">
                 <h4 class="text-center text-warning">Per favore inserisci il tuo codice di autentificazione</h4>  
                 <form action="{{url('/two-factor-challenge')}}" method="POST">
                     @csrf
@@ -18,7 +18,7 @@
                     <p id="recoveryCodeWrapper" class="filt-sel-cst d-inline">Usa un codice di recupero</p>
                 </div>
             </div>
-            <div id="recoveryChWrapper" class="d-none">
+            <div id="recoveryChWrapper" class="d-none invisible">
                 <h4 class="text-center text-warning">Per favore inserisci un tuo codice di recupero</h4>  
                 <form action="{{url('/two-factor-challenge')}}" method="POST">
                     @csrf
